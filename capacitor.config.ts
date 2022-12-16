@@ -1,3 +1,5 @@
+/// <reference types="@capacitor/splash-screen" />
+
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
@@ -5,6 +7,12 @@ const config: CapacitorConfig = {
   appName: 'WebDaveDemo',
   webDir: 'www',
   bundledWebRuntime: false,
+  plugins: {
+    SplashScreen: {
+      splashFullScreen: true,
+      launchAutoHide: false,
+    },
+  },
 };
 
 export default config;
