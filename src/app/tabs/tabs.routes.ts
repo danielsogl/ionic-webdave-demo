@@ -7,20 +7,35 @@ export const TAB_ROUTES: Route[] = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'movies',
         loadChildren: () =>
-          import('../tab1/tab1.routes').then((m) => m.TAB1_ROUTES),
+          import('./movies-tab/movies-tab.routes').then((m) => m.ROUTES),
+      },
+      {
+        path: 'about',
+        loadChildren: () =>
+          import('./about-tab/about-tab.routes').then((m) => m.ROUTES),
+      },
+      {
+        path: 'favorites',
+        loadChildren: () =>
+          import('./favorites-tab/favorites-tab.routes').then((m) => m.ROUTES),
+      },
+      {
+        path: 'tv-shows',
+        loadChildren: () =>
+          import('./tv-shows-tab/tv-shows-tab.routes').then((m) => m.ROUTES),
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/movies',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/movies',
     pathMatch: 'full',
   },
 ];
