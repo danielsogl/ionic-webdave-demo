@@ -1,0 +1,40 @@
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.blured {
+  filter: blur(2px) grayscale(20%);
+}
+
+.bottom-left {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  text-align: left;
+}
+
+.top-right {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.title-text {
+  font-size: calc(3vw + 1vh);
+  font-weight: bold;
+}
+
+.tagline-text {
+  display: inline-block;
+  font-size: calc(3vw + 1vh);
+}
+
+ion-badge {
+  --background: var(--ion-color-danger);
+  --color: white;
+  --padding-end: 20px;
+  --padding-start: 20px;
+  margin-right: 4px;
+}

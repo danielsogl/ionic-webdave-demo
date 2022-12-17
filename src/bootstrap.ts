@@ -11,11 +11,7 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(APP_ROUTES),
     provideHttpClient(),
-    importProvidersFrom(
-      IonicModule.forRoot({
-        backButtonText: 'Zurück',
-      })
-    ),
+    importProvidersFrom(IonicModule.forRoot()),
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
 });

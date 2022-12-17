@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, of } from 'rxjs';
+import { Movie } from '../models/movie.model';
 import { TrendingItem, TrendingResponse } from '../models/trending.model';
 import { TMDBService } from './tmdb-api.service';
 
@@ -15,12 +16,12 @@ export class MoviesService {
   public readonly trendingMoviesLoading$ =
     this.trendingMoviesLoading.asObservable();
 
-  // trending tv shows
-  private readonly trendingTVSHows = new BehaviorSubject<TrendingItem[]>([]);
-  public readonly trendingTVShows$ = this.trendingTVSHows.asObservable();
-  private readonly trendingTVShowsLoading = new BehaviorSubject<boolean>(false);
-  public readonly trendingTVShowsLoading$ =
-    this.trendingTVShowsLoading.asObservable();
+  // movie details
+  private readonly movieDetails = new BehaviorSubject<Movie | null>(null);
+  public readonly movieDetails$ = this.movieDetails.asObservable();
+  private readonly movieDetailsLoading = new BehaviorSubject<boolean>(false);
+  public readonly movieDetailsLoading$ =
+    this.movieDetailsLoading.asObservable();
 
   loadTrendingMovies(force = false) {
     if (this.trendingMovies.value.length && !force) return;
@@ -32,13 +33,15 @@ export class MoviesService {
     });
   }
 
-  loadTrendingTVShows(force = false) {
-    if (this.trendingMovies.value.length && !force) return;
-
-    this.trendingTVShowsLoading.next(true);
-    this.tmdbApiService.getTrendingTVShows().subscribe((response) => {
-      this.trendingTVSHows.next(response.results);
-      this.trendingTVShowsLoading.next(false);
+  loadMovieById(movieId: number) {
+    this.movieDetailsLoading.next(true);
+    this.tmdbApiService.getMovieById(movieId).subscribe((movie) => {
+      this.movieDetails.next(movie);
+      this.movieDetailsLoading.next(false);
     });
+  }
+
+  clearMovieDetails() {
+    this.movieDetails.next(null);
   }
 }

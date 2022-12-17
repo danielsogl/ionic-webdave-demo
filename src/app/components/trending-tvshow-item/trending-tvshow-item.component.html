@@ -1,0 +1,13 @@
+<ion-item>
+  <ion-thumbnail slot="start">
+    <img
+      [alt]="item.title"
+      [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path"
+    />
+  </ion-thumbnail>
+
+  <ion-label>
+    <h2>{{ item.name }}</h2>
+    <p>{{ item.overview }}</p>
+  </ion-label>
+</ion-item>

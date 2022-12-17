@@ -25,8 +25,9 @@
 </ion-content>
 
 <ng-template #moviesList>
-  <app-trending-item
+  <app-trending-movie-item
     *ngFor="let movie of trendingMovies$ | async"
     [item]="movie"
-  ></app-trending-item>
+    (click)="openDetails(movie)"
+  ></app-trending-movie-item>
 </ng-template>

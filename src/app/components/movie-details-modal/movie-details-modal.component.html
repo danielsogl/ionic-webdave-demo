@@ -1,0 +1,71 @@
+<ion-content>
+  <ng-container *ngIf="movieDetails$ | async as details">
+    <div class="container">
+      <ion-img
+        class="blured"
+        [src]="'https://image.tmdb.org/t/p/w500' + details.backdrop_path"
+      ></ion-img>
+      <div class="bottom-left">
+        <span class="title-text">{{ title }}</span>
+        <span class="tagline-text">{{ details.tagline }}</span>
+      </div>
+      <div class="top-right" (click)="dismissModal()">
+        <ion-icon name="close"></ion-icon>
+      </div>
+    </div>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Facts</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content class="ion-no-padding">
+        <ion-list lines="none">
+          <ion-item>
+            <ion-label>Release Date</ion-label>
+            <ion-note slot="end">{{
+              details.release_date | date : "mediumDate"
+            }}</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Runtime</ion-label>
+            <ion-note slot="end">{{ details.runtime }} min</ion-note>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Overview</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <span>{{ details.overview }}</span>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Rating</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content class="ion-no-padding">
+        <ion-list lines="none">
+          <ion-item>
+            <ion-label>TMDB</ion-label>
+            <ion-note slot="end">{{ details.vote_average }}</ion-note>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Genres</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-badge *ngFor="let genre of details.genres">
+          {{ genre.name }}
+        </ion-badge>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+</ion-content>

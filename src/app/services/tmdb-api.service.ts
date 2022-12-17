@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TrendingResponse } from '../models/trending.model';
 import { delay, Observable } from 'rxjs';
+import { Movie } from '../models/movie.model';
 
 @Injectable({ providedIn: 'root' })
 export class TMDBService {
@@ -16,7 +17,7 @@ export class TMDBService {
           api_key: this.apiKey,
         },
       })
-      .pipe(delay(1500));
+      .pipe(delay(0));
   }
 
   getTrendingTVShows(): Observable<TrendingResponse> {
@@ -26,6 +27,14 @@ export class TMDBService {
           api_key: this.apiKey,
         },
       })
-      .pipe(delay(1500));
+      .pipe(delay(0));
+  }
+
+  getMovieById(movieId: number): Observable<Movie> {
+    return this.http.get<Movie>(`${this.baseUrl}/movie/${movieId}`, {
+      params: {
+        api_key: this.apiKey,
+      },
+    });
   }
 }

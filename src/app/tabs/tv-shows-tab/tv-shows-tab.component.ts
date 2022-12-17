@@ -5,9 +5,9 @@ import {
   RefresherCustomEvent,
   ViewWillEnter,
 } from '@ionic/angular';
-import { MoviesService } from 'src/app/services/movies.service';
 import { TrendingLoadingItemComponent } from 'src/app/components/trending-loading-item/trending-loading-item.component';
-import { TrendingItemComponent } from 'src/app/components/trending-item/trending-item.component';
+import { TVShowsService } from 'src/app/services/tv-shows.service';
+import { TrendingTVShowItemComponent } from 'src/app/components/trending-tvshow-item/trending-tvshow-item.component';
 
 @Component({
   selector: 'app-tv-shows-tab',
@@ -15,7 +15,7 @@ import { TrendingItemComponent } from 'src/app/components/trending-item/trending
   imports: [
     CommonModule,
     IonicModule,
-    TrendingItemComponent,
+    TrendingTVShowItemComponent,
     TrendingLoadingItemComponent,
   ],
   templateUrl: './tv-shows-tab.component.html',
@@ -23,19 +23,19 @@ import { TrendingItemComponent } from 'src/app/components/trending-item/trending
 })
 export class TvShowsTabComponent implements ViewWillEnter {
   // injectables
-  private readonly moviesService = inject(MoviesService);
+  private readonly tvShowsService = inject(TVShowsService);
 
   // public streams
-  public readonly trendingTVShows$ = this.moviesService.trendingTVShows$;
+  public readonly trendingTVShows$ = this.tvShowsService.trendingTVShows$;
   public readonly trendingTVShowsLoading$ =
-    this.moviesService.trendingTVShowsLoading$;
+    this.tvShowsService.trendingTVShowsLoading$;
 
   ionViewWillEnter() {
-    this.moviesService.loadTrendingTVShows();
+    this.tvShowsService.loadTrendingTVShows();
   }
 
   refreshMovies(event: Event) {
-    this.moviesService.loadTrendingTVShows(true);
+    this.tvShowsService.loadTrendingTVShows(true);
     (event as RefresherCustomEvent).target.complete();
   }
 }

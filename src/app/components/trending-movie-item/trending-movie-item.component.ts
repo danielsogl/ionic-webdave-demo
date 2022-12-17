@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { TrendingItem } from 'src/app/models/trending.model';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
-  selector: 'app-trending-item',
+  selector: 'app-trending-movie-item',
   standalone: true,
   imports: [CommonModule, IonicModule],
-  templateUrl: './trending-item.component.html',
-  styleUrls: ['./trending-item.component.scss'],
+  templateUrl: './trending-movie-item.component.html',
+  styleUrls: ['./trending-movie-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TrendingItemComponent {
+export class TrendingMovieItemComponent {
   @Input() item!: TrendingItem;
 }
