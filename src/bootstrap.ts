@@ -1,3 +1,4 @@
+import { provideHttpClient } from '@angular/common/http';
 import { importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, RouteReuseStrategy } from '@angular/router';
@@ -9,7 +10,12 @@ import { APP_ROUTES } from './app/app.routes';
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(APP_ROUTES),
-    importProvidersFrom(IonicModule.forRoot()),
+    provideHttpClient(),
+    importProvidersFrom(
+      IonicModule.forRoot({
+        backButtonText: 'Zurück',
+      })
+    ),
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
 });

@@ -10,4 +10,23 @@
       <ion-title size="large">Movies</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-refresher slot="fixed" (ionRefresh)="refreshMovies($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+    <ng-container *ngIf="trendingMoviesLoading$ | async; else moviesList">
+      <app-trending-loading-item
+        *ngFor="let item of [0, 1, 2, 3, 4]"
+      ></app-trending-loading-item>
+    </ng-container>
+  </ion-list>
 </ion-content>
+
+<ng-template #moviesList>
+  <app-trending-item
+    *ngFor="let movie of trendingMovies$ | async"
+    [item]="movie"
+  ></app-trending-item>
+</ng-template>
